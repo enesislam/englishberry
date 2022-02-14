@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -165,4 +164,3 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 15
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 600
-django_heroku.settings(locals())
