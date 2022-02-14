@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_file %}
+            <link rel="stylesheet" href="{% static "css/contacts.min.css" %}" />
+<script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
+{% endblock css_file %}
+{% block content %}
+    
+        
+        <main>
+            <!-- contact info section start --><section class="contacts_secondary section">
+                <div class="container d-xl-flex align-items-center justify-content-between">
+                    <div class="contacts_secondary-rating">
+                        <h2 class="contacts_secondary-header">Babul İlim - İlim, kalbe açılan bir kapıdır. </h2>
+                        <div class="rating">
+                            <div class="container">
+                                 
+                            </div>
+                        </div>
+                    </div>
+                    <div  class="contacts_secondary-form" data-aos="fade-up">
+                        <div id="output" class="contacts" data-aos="fade-up">
+                            <div class="contacts_header">
+                                <h2 class="contacts_header-title">Sorularınıza cevap verelim</h2>
+                                <p class="contacts_header-text">
+                                   En kısa sürede cevap vermeye çalışacağız
+                                </p>
+                            </div>
+                            <form
+                                class="contacts_form form d-sm-flex flex-wrap justify-content-between"
+                                action="post"
+                                method="post"
+                                id="form"
+                                data-type="feedback"
+                            >
+                                 
+                                <div class="field-wrapper">
+                                    <label class="label" for="email">
+                                        <i class="icon-email icon"></i>
+                                    </label>
+                                    <input class="field required" id="email" type="text" data-type="email" placeholder="Mail" />
+                                </div>
+                                <textarea class="field textarea required" id="text" placeholder="Mesaj"></textarea>
+                                <button class="btn theme-element theme-element--accent" type="submit">Gönder</button>
+                            </form>
+                             
+       
+                        </div>
+                        <div id="output2"  class="contacts" data-aos="fade-up">
+                            <p id="my_msg"></p><br><p>Mesaj:<b id='my_txt'></b>
+                                <br>
+                            </p>
+                            <p>Gönderen: <b id="my_nme"></b></p>
+                            <br>
+                            <button class="btn theme-element theme-element--accent" id="refresh_message_page">Başka bir Mesaj Gönder</button>
+                        </div>
+                    </div>
+                </div>
+            <section class="contacts_main section">
+                <div class="container container--contacts d-xl-flex align-items-center">
+                    <div class="contacts_info col-xl-7" data-aos="fade-up">
+                        <div class="contacts_info-header">
+                            <h2 class="contacts_info-header_title">Bağlantılar</h2>
+                            <p class="contacts_info-header_text">
+                                Bize bu bağlantılardan ulaşabilirsiniz
+                            </p>
+                        </div>
+                        <div class="contacts_info-main">
+                             
+                            <div class="contacts_info-main_block d-sm-flex align-items-start">
+                                <i class="icon-email icon"></i>
+                                <div class="wrapper d-flex flex-column">
+                                    <a class="link" href="mailto:example@domain.com">babulilim@gmail.com</a>
+                                    <a class="link" href="mailto:example@domain.com">babulilim2@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                         
+                    </div>
+                    
+                </div>
+            </section>
+            <!-- contact info section end -->
+            <!-- contact form section start -->
+            
+            </section>
+            <!-- contact form section end -->
+        </main>
+        <script src="{% static "js/common.min.js" %}"></script>
+ <script type="text/javascript">
+$('#output2').hide()
+
+  $('#form').on('submit', function(e){
+             
+         e.preventDefault();
+         
+           $.ajax({
+                type : "POST", 
+                url: "{% url 'sorusor' %}",
+                data: {
+                    email:$('#email').val(),
+                    text:$('#text').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    dataType: "json",
+                },
+                
+                success: function(data){
+                $('#output').hide()
+                $('#output2').show()
+                $('#my_msg').html(data.msg)
+                $('#my_txt').html(data.text)
+                $('#my_nme').html(data.name)
+                 $('#refresh_message_page').click( function (){
+                 $('#output').show()
+                 $('#output2').hide()
+                });
+
+                
+                }
+                ,
+         
+                failure: function() {
+                    
+                }
+         
+         
+            });
+         
+         
+                 });
+</script>
+ {% endblock content %}
+
+
+-----------
+
+
+{% extends "base.html" %}
+{% load static %}
+{% block css_file %}
+    <script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
+
+{% endblock css_file %}
+{% block content %}
+{% load account %}            
+        <main>
+            
+            <!-- benefits section start -->
+            <section class="about_benefits section">
+                <div class="container">
+                    <div class="about_benefits-header d-md-flex align-items-center justify-content-between">
+                        <h1 data-aos="fade-up">{% user_display user %}</h1><h4 data-aos="fade-up"> Ders Sayısı:{{contents.count}}</h4><br>
+                       
+                    </div> 
+                   <hr data-aos="fade-left"><br>
+                    {% if like %}   
+                    <h3  data-aos="fade-left">Beğendiklerim</h3><h4>tümünü gör</h4>
+                    {% for post in like %}
+                    
+                    {{post.title}}
+                    {{post.id}}
+           <br>
+                    {% endfor %}  
+                    {% endif %}<hr data-aos="fade-left"><br>
+
+                    {% if sorduklarim %}  
+                    <div id="eff"><h3 id=" output" data-aos="fade-left">Sorduklarım</h3><h4>tümü</h4> </div>
+                     {% for soru in sorduklarim %}<br>
+                    <span  class="main_amenities-item d-inline-flex align-items-center">
+                                             <a><i name="{{ soru.id }}" id="co" class='likin bx bxs-x-circle'><b> {{soru.text|truncatewords:4}} </b></i></a>
+                                              
+                                        </span>
+                    {% endfor %}  
+                    {% endif %}
+</div> 
+                </div>
+            </section> 
+        </main>
+ <script type="text/javascript">
+$(".likin","span > a").click(function(){
+    $.ajax({
+             type: "POST",
+             url: "{% url 'account_profile' %}",
+             data: {'content_id': $(this).attr('name'),'csrfmiddlewaretoken': '{{ csrf_token }}'},
+             dataType: "json",
+             success: function(response) {
+                
+              selector = document.getElementsByName(response.content_id);     
+              $(selector).html(response.msg)
+                 if (response.bos_gari){
+                        $('#eff').html("<div id='eff'><h3 data-aos='fade-left' > </h3><h4>"+ response.msg+"</h4> </div>")
+                 }
+                function hide_it() {
+                 $(selector).html('');
+                 $(selector,"span > a").removeAttr("class");
+                 $(selector,"span > a").removeAttr("name");
+                 $(selector).removeAttr("class");
+ 
+                }
+                setTimeout(hide_it, 500);
+
+              }
+
+        });
+
+  });</script>
+{% endblock content %}

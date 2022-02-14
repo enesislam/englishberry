@@ -1,0 +1,106 @@
+
+{% load static %} 
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Berry — Giriş Yap — İngilizce Öğrenme Platformu </title>
+
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-theme8.css' %}">
+       <style type="text/css">
+        @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+.info-msg,
+.success-msg,
+.warning-msg,
+.error-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+}
+.info-msg {
+  color: #059;
+  background-color: #BEF;
+}
+.success-msg {
+  color: #270;
+  background-color: #DFF2BF;
+}
+.warning-msg {
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
+.error-msg {
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+    </style>
+</head>
+<body>
+    <div class="form-body" class="container-fluid">
+        <div class="website-logo">
+            <a href="/">
+                <div class="logo"><img id="brandHeader" width="244" height="245" viewBox="0 0 244 245" fill="none" src="{% static "img/logo.svg" %}">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <a href="/"><div class="logo"><img id="brandHeader" width="244" height="245" viewBox="0 0 444 445" fill="none" src="{% static "img/logo.svg" %}"></a>
+                </div>
+                </div>
+            </div>
+            <div class="form-holder">
+                 {% if messages %}{% for message in messages %}
+        <div  id="kapat" class="info-msg"><div class="conten">
+             <i  class="fa fa-info-circle"></i>
+  {{message}} <i onclick="kapatıver()"  style="float:right;"  class='bx bx-x-circle'></i>
+        </div>
+ 
+</div>  {% endfor %}
+{% endif %}
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Giriş yaparak özelliklerin kilidini aç</h3>
+                        <p>Yorum yapma, mesaj gönderme, izlenenler listesi ve daha fazlası.</p>
+                        {% if messages %}
+                            {% for message in messages  %}
+                              <p>  {{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="page-links">
+                            <a href="{% url 'account_login' %}" class="active">Giriş Yap</a><a href="{% url 'account_signup' %}" >Kayıt Ol</a>
+                        </div>
+                        <form action="{% url 'account_login' %}"method="POST">
+                            {% csrf_token %}
+                            {{ form.login  }}{{ form.password }}
+                            
+                              
+                            {{ form.remember }}
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">Giriş Yap</button>
+                            </div>
+                        </form>
+                        <div class="other-links">
+                             <a href="{% url 'account_reset_password' %}">Şifremi unutum</a>
+                            <span>Veya </span><a href="#">Facebook</a><a href="#">Google</a><a href="#">Linkedin</a><span>ile kayıt ol</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/popper.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/main.js" %}"></script>
+</body>
+</html>

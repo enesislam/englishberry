@@ -1,0 +1,267 @@
+Yapılacaklar
+
+Bildirimler
+
+Anonim Kullanıcılar için like butonu engeli
+
+Yorum yapma
+
+Yorum silme
+
+Admin taraflı yorum engelleme
+
+
+{% extends "base.html" %}
+{% load static %}
+{% block css_file %}
+    <script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
+<style type="text/css">
+    .profile {
+    margin: auto;
+    background-color: #fff;
+    border-radius: 40px;
+    width: 480px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 30px;
+        border: 15px solid rgba(#f6f2ff, 0.7);
+        object-fit: cover;
+    }
+    .name {
+        margin-top: 24px;
+        font-size: 22px;
+        font-weight: bold;
+    }
+    .details {
+        font-size: 13px;
+        font-weight: 400;
+        width: 50%;
+        margin-top: 8px;
+        line-height: 1.3;
+        text-align: center;
+    }
+    .buttons {
+        display: flex;
+        align-items: center;
+        margin-top: 50px;
+        .message {
+            background-color: #ffedd2;
+        }
+        .follow {
+            background: linear-gradient(
+                90deg,
+                rgba(#fa3967, 1) 0%,
+                rgba(#fa9639, 1) 100%
+            );
+        }
+        .button {
+            width: 186px;
+            height: 54px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 12px;
+            cursor: pointer;
+            &:first {
+                margin-left: 0px;
+            }
+
+            svg {
+                height: 22px;
+                margin-right: 4px;
+            }
+        }
+    }
+}
+
+</style>
+{% endblock css_file %}
+{% block content %}
+{% load account %}            
+        <main>
+            <div class="profile">
+     
+    <span style="margin-top: 24px;font-size: 30px;font-weight: bold;">{% user_display user %}</span>
+    
+    <span style=" font-size: 17px;font-weight: 400;width: 50%;margin-top: 8px;line-height: 1.3;text-align: center;" id="bio">
+         <form style="background-color:#ffedd2; border-radius:18px; margin-bottom: 5px;" id="add-bio" action="add_bio" method="POST">
+   <input style="font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid black;
+  outline: 0;
+    color: black;
+
+  padding: 10px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+  text-align:center;
+
+  " type="input" class="form__field" placeholder="Bio ekle" value="{% if user_bio_statue == None %}{% elif user_bio_statue %}{% for i in user_bio_statue  %}{{i.text}}{% endfor %}{% endif %}" name="name" id='bio_text' required />
+  <button style="background-color:#83c99e; color:#111f16; border-radius:7px;margin:4px;padding:4px;" type="submit" name="submit" value="submit">Kaydet</button>
+      </form>
+        {% if user_bio_statue == None %}
+        Bio Ekle <i id='ifUneedThenAdd' class='bx bx-plus-medical'></i>
+       
+ 
+        {% elif user_bio_statue %}
+       <b id='bionun_texti'> {% for i in user_bio_statue  %}
+                    {{i.text}}
+
+        {% endfor %}</b>
+        <i id='ifUneedThenAdd' class='bx bxs-pencil' ></i>  
+    {% endif %}</span>
+
+    
+
+    <div style="display: flex;align-items: center;margin-top: 50px;">
+        <div style="width: 186px;
+            height: 54px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 12px;
+            cursor: pointer;background-color: #fa9639;background: linear-gradient(
+                90deg,
+                rgba(#fa3967, 1) 0%,
+                rgba(#fa9639, 1) 100%
+            );"  >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M3 21V19C3 17.9391 3.42143 16.9217 4.17157 16.1716C4.92172 15.4214 5.93913 15 7 15H11C12.0609 15 13.0783 15.4214 13.8284 16.1716C14.5786 16.9217 15 17.9391 15 19V21" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M19 8V14M16 11H22H16Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Takip Et
+        </div>
+        <div style="background-color: #ffedd2;width: 186px;
+            height: 54px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 12px;
+            cursor: pointer;"  class="button message">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 20L9 17H7C6.20435 17 5.44129 16.6839 4.87868 16.1213C4.31607 15.5587 4 14.7956 4 14V8C4 7.20435 4.31607 6.44129 4.87868 5.87868C5.44129 5.31607 6.20435 5 7 5H17C17.7956 5 18.5587 5.31607 19.1213 5.87868C19.6839 6.44129 20 7.20435 20 8V14C20 14.7956 19.6839 15.5587 19.1213 16.1213C18.5587 16.6839 17.7956 17 17 17H15L12 20Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8 9H16" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8 13H14" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Mesaj 
+        </div>
+    </div>
+</div>
+            <!-- benefits section start -->
+            <section class="about_benefits section">
+                <div class="container">
+                    <div class="about_benefits-header d-md-flex align-items-center justify-content-between">
+                        <h1 data-aos="fade-up">{% user_display user %}</h1><h4 data-aos="fade-up"> Ders Sayısı:{{contents.count}}</h4><br>
+                       
+                    </div> 
+                   <hr data-aos="fade-left"><br>
+                    {% if like %}   
+                    <h3  data-aos="fade-left">Beğendiklerim</h3><h4>tümünü gör</h4>
+                    {% for post in like %}
+                    
+                    {{post.title}}
+                    
+           <br>
+                    {% endfor %}  
+                    {% endif %}<hr data-aos="fade-left"><br>
+
+                    {% if sorduklarim %}  
+                    <div id="eff"><h3 id=" output" data-aos="fade-left">Sorduklarım</h3><h5 id="edit-click">Düzenlemek için tıkla</h5> </div>
+                     {% for soru in sorduklarim %}<br>
+                    <span  class="main_amenities-item d-inline-flex align-items-center">
+                                             <a><i name="{{ soru.id }}" id="co" class='likin bx bxs-x-circle'><b> {{soru.text|truncatewords:4}} </b></i></a>
+                                              
+                                        </span>
+                    {% endfor %}  
+                    {% endif %}
+</div> 
+                </div>
+            </section> 
+        </main>
+ <script type="text/javascript">
+    $("#edit-click").click(function(){
+                     
+              
+$(".likin","span > a").click(function(){
+    $.ajax({
+             type: "POST",
+             url: "{% url 'account_profile' %}",
+             data: {'content_id': $(this).attr('name'),'csrfmiddlewaretoken': '{{ csrf_token }}','operation':'delete_soru'},
+             dataType: "json",
+             success: function(response) {
+                selector = document.getElementsByName(response.content_id);
+                $(selector).html(response.msg)
+                 
+
+                 if (response.bos_gari){
+                        $('#eff').html("<div id='eff'><h3 data-aos='fade-left' > </h3><h4>"+ response.msg+"</h4> </div>")
+                 }
+                function hide_it() {
+                 $(selector).html('');
+                 $(selector,"span > a").removeAttr("class");
+                 $(selector,"span > a").removeAttr("name");
+                 $(selector).removeAttr("class");
+ 
+                }
+                setTimeout(hide_it, 500);
+             
+              }
+
+        });
+
+  })   });</script>
+
+
+ <script type="text/javascript">
+ $('#add-bio').hide()
+$('#ifUneedThenAdd').click(function(){
+     $('#add-bio').show()
+
+});
+  $('#add-bio').on('submit', function(e){
+             
+         e.preventDefault();
+         
+           $.ajax({
+                type : "POST", 
+                url: "{% url 'account_profile' %}",
+                data: {
+                    text:$('#bio_text').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    dataType: "json",
+                    'operation':'add_bio'
+                },
+                
+                success: function(data){
+                    console.log(data)
+                $('#output').hide()
+                $('#output2').show()
+                $('#bionun_texti').html(data.bio)
+                 $('#add-bio').hide()
+
+
+             }
+                ,
+                failure: function() {
+               }
+         });
+});
+</script>
+{% endblock content %}

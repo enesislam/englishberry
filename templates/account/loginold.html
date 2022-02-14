@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}Please sign in with one
+of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+  <div class="login-or">{% trans 'or' %}</div>
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+ 
+    
+                    
+        <main>
+            
+            <!-- benefits section start -->
+            <section class="about_benefits section">
+                <div class="container">
+                    <div class="about_benefits-header d-md-flex align-items-center justify-content-between">
+                        <h2 class="about_benefits-header_title" data-aos="fade-up">{% trans "Sign In" %}</h2>
+                    </div> 
+                    <br>
+                    <p data-aos="fade-left">{% blocktrans %}If you have not created an account yet, then please
+<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+
+ 
+{% endif %}
+{% for message in messages %}
+  {{message}}
+{% endfor %}
+<div class="login__forms">
+                    <form action="{% url 'account_login' %}"method="POST"  class="login__registre" id="login-in">
+                        <h1 class="login__title">Sign In</h1>
+    
+                        <div class="login__box">
+                            {% csrf_token %}
+                             <i class='bx bx-user login__icon'></i> {{ form.login  }}
+                        </div>
+    
+                        <div class="login__box">
+                            <i class='bx bx-lock-alt login__icon'></i>{{ form.password }}
+                        </div>
+
+                     
+
+                        <a href="{% url 'account_reset_password' %}" class="login__forgot">Forgot password?</a>
+
+                        <a class="login__forgot">Remember Me{{ form.remember }}</a>
+
+                         <button type="submit" class="login__button" style="width:100%; height: 100%">{% trans "Sign In" %}</button>
+{% if socialaccount_providers %}
+
+{% blocktrans with site.name as site_name %}Please sign in with one
+of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+for a {{ site_name }} account and sign in below:{% endblocktrans %}</span>
+                            <span class="login__signin" id="sign-up">{% trans 'or' %}</span>
+                            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                        </div>
+  
+{% include "socialaccount/snippets/login_extra.html" %}
+{% else %}
+
+                        <div>
+                           
+                           <span class="login__account">{% blocktrans %}Don't have an Account?, then please
+<a class="login__signin" href="{{ signup_url }}"> Sign up</a> first.{% endblocktrans %}</span>
+ {% endif %}
+                        </div>
+                    </form>
+                </div>
+
+                </div>
+            </section> 
+        </main>
+   
+
+{% endblock %}
+
+ <h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
+<div class="container" id="container">
+  <div class="form-container sign-up-container">
+    <form action="#">
+      <h1>Create Account</h1>
+      <div class="social-container">
+        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <span>or use your email for registration</span>
+      <input type="text" placeholder="Name" />
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <button>Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form action="#">
+      <h1>Sign in</h1>
+      <div class="social-container">
+        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <span>or use your account</span>
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <a href="#">Forgot your password?</a>
+      <button>Sign In</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <button class="ghost" id="signUp">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+

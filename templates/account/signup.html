@@ -1,0 +1,102 @@
+
+{% load static %} 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Berry —  Kayıt Ol — İngilizce Öğrenme Platformu -</title>
+
+ 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-theme8.css' %}">
+       <style type="text/css">
+        @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+.info-msg,
+.success-msg,
+.warning-msg,
+.error-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+}
+.info-msg {
+  color: #059;
+  background-color: #BEF;
+}
+.success-msg {
+  color: #270;
+  background-color: #DFF2BF;
+}
+.warning-msg {
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
+.error-msg {
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+    </style>
+</head>
+<body>
+    <div class="form-body" class="container-fluid">
+        <div class="website-logo">
+            <a href="/">
+                <div class="logo">
+                    <img  class="logo-size" src="{% static "img/logo.svg" %}">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>    
+                <div class="info-holder">
+                    <h3>Kayıt olarak özelliklerin kilidini aç.</h3>
+                    <p>Yorum yapma, mesaj gönderme, izlenenler listesi ve daha fazlası.</p>
+                    <img src="images/graphic4.svg" alt="">
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <div class="website-logo-inside">
+                            <a href="/">
+                                <div class="logo">
+                                      <img id="brandHeader" width="150" height="125" viewBox="0 0 144 145"   src="{% static "img/logo.svg" %}"> 
+                         </div>
+                            </a>
+                        </div>
+                        <div class="page-links">
+                            <a href="{% url 'account_login' %}" >Giriş Yap</a><a href="{% url 'account_signup' %}" class="active">Kayıt Ol</a>
+                        </div>     {% if messages %}{% for message in messages %}
+        <div  id="kapat" class="info-msg"><div class="conten">
+             <i  class="fa fa-info-circle"></i>
+  {{message}} <i onclick="kapatıver()"  style="float:right;"  class='bx bx-x-circle'></i>
+        </div>
+ 
+</div>  {% endfor %}
+{% endif %}
+                        <form  method="post" action="{% url 'account_signup' %}">
+                           {% csrf_token %}
+                           {{form.as_p}}
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">Kayıt Ol</button>
+                            </div>
+                        </form>
+                        <div class="other-links">
+                            <span>Or register with</span><a href="#">Facebook</a><a href="#">Google</a><a href="#">Linkedin</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/popper.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/main.js" %}"></script>
+</body>
+</html>

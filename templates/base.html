@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+                <meta name="description" content="Sende bize katıl kolay ingilizce öğren"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Anasayfa | EnglishBerry</title>
+
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static "apple-touch-icon.png" %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon-32x32.png" %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static "favicon-16x16.png" %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>  
+        <link rel="manifest" href="/site.webmanifest">
+
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+        <script id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script>
+        <script src="https://www.youtube.com/player_api"></script>
+        <link rel="stylesheet preload" as="style" href="{% static 'css/preload.min.css' %} " />
+        <link rel="stylesheet preload" as="style" href="{% static 'css/libs.min.css' %}" />
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+{% block css_file %}
+    <style type="text/css">
+        @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+.info-msg,
+.success-msg,
+.warning-msg,
+.error-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+}
+.conten{
+    margin: 10px;
+}
+.info-msg {
+    border-radius: 7px;
+    color: #059;
+    background-color: #BEF;
+}
+.success-msg {
+  color: #270;
+  background-color: #DFF2BF;
+}
+.warning-msg {
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
+.error-msg {
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+    </style>
+{% endblock css_file %}
+        <link rel="stylesheet" href="{% static 'css/index.min.css' %}" />
+    </head>
+    <body>
+        <header class="header d-flex align-items-center" data-page="home">
+            <div class="container position-relative d-flex justify-content-between align-items-center">
+                <a class="brand d-flex align-items-center" href="/">
+                    <span class="brand_logo theme-element">
+                        <img id="brandHeader" width="44" height="45" viewBox="0 0 24 35" fill="none" src="{% static "img/logo-light.svg" %}">
+                        
+                    </span>
+                    <span class="brand_name" title="EnglishBerry">English Berry</span>
+                </a>
+                <div class="header_offcanvas offcanvas offcanvas-end" id="menuOffcanvas">
+                    <div class="header_offcanvas-header d-flex justify-content-between align-content-center">
+                        <a class="brand d-flex align-items-center" href="/">
+                            <span class="brand_logo theme-element">
+                                <img id="brandHeader" width="44" height="45" viewBox="0 0 44 45" fill="none" src="{% static "img/logo-light.svg" %}">
+                            </span>
+                            <span class="brand_name" title="EnglishBerry">English Berry</span>
+                        </a>
+                        <button class="close" type="button" data-bs-dismiss="offcanvas">
+                            <i class="icon-close--entypo"></i>
+                        </button>
+                    </div>
+                    <nav class="header_nav">
+                        <ul class="header_nav-list">
+                            <li class="header_nav-list_item">
+                                <a class="nav-item" href="/" data-page="{% if request.get_full_path == '/' %}home{% endif %}">Anasayfa</a>
+                            </li>
+                            <li class="header_nav-list_item">
+                                <a class="nav-item" href="{% url 'about' %} " data-page="{% if request.get_full_path == '/hakkimizda/' %}home{% endif %}">Hakkımızda</a>
+                            </li>
+                            <li class="header_nav-list_item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle d-inline-flex align-items-center"
+                                    href="#dersler"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#roomMenu"
+                                    aria-expanded="false"
+                                    aria-controls="roomMenu"
+                                    data-page="{% if request.get_full_path == '/dersler' %}home{% endif %}"
+                                >
+                                    Dersler
+                                    <i class="icon-chevron_down--entypo icon"></i>
+                                </a>
+                                <div class="dropdown-menu collapse" id="roomMenu">
+                                    <ul class="dropdown-list">
+
+                                       <li class="list-item">
+                                            <a class="dropdown-item nav-item" data-page="{% if request.get_full_path == '/dersler/' %}home{% endif %}" href="{%url 'posts' %}">Tüm Dersler</a>
+                                        </li>
+                             <li class="list-item">
+                                            <a class="dropdown-item nav-item" data-page="{% if request.get_full_path == '/dersler/' %}home{% endif %}" href="{% url 'category' 'Genel' %}">Genel İngilizce</a>
+                                        </li>
+                                         <li class="list-item">
+                                            <a class="dropdown-item nav-item" data-page="{% if request.get_full_path == '/dersler/' %}home{% endif %}" href="{% url 'category' 'Listening' %}">Listening Pratik</a>
+                                        </li>
+                                       <li class="list-item">
+                                            <a class="dropdown-item nav-item" data-page="{% if request.get_full_path == '/dersler/' %}home{% endif %}" href="{% url 'category' 'Kısa' %}">Kısa Alıştırmalar</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="header_nav-list_item">
+                                <a class="nav-item" href="{% url 'yazilar' %} " data-page="{% if request.get_full_path == '/yazilar/' %}home{% endif %}">Makaleler</a>
+                            </li>
+                             
+                           <li class="header_nav-list_item">
+                                <a class="nav-item" href="{% url 'contact' %} " data-page="{% if request.get_full_path == '/iletisim/' %}home{% endif %}">İletişim</a>
+                            </li>
+                            </li>{% if user.is_authenticated %}
+                            <li class="header_nav-list_item dropdown">
+                                    <a class="nav-link nav-link--contacts dropdown-toggle d-inline-flex align-items-center"
+                                    href="#"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#contactsMenu"
+                                    aria-expanded="false"
+                                    aria-controls="contactsMenu"
+                                > 
+                                    <i class='bx bx-user'></i>
+                                    
+                                </a> 
+                                <div class="dropdown-menu collapse" id="contactsMenu">
+                                    <ul class="dropdown-list">
+                                        <li class="list-item">
+                                            <a class="dropdown-item nav-item" data-page="contacts01" href="{% url 'account_profile' %}">Profilim</a>
+                                        </li>
+                                        <li class="list-item">
+                                            <a class="dropdown-item nav-item" data-page="contacts02" href="{% url 'account_logout' %}">Çıkış Yap</a>
+                                        </li>
+                                    </ul>
+                                </div> 
+                            </li>
+                            {% else %}
+                            <li class="header_nav-list_item dropdown">
+                                    <a class="nav-link nav-link--contacts dropdown-toggle d-inline-flex align-items-center"
+                                    href="#"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#contactsMenu"
+                                    aria-expanded="false"
+                                    aria-controls="contactsMenu"
+                                > 
+                                    <i class='bx bx-log-in'></i>
+                                    
+                                 
+                                     
+                                </a> 
+                                <div class="dropdown-menu collapse" id="contactsMenu">
+                                    <ul class="dropdown-list">
+                                        <li class="list-item">
+                                            <a class="dropdown-item nav-item" data-page="contacts01" href="{% url 'account_login' %}">Giriş Yap</a>
+                                        </li>
+                                        <li class="list-item">
+                                            <a class="dropdown-item nav-item" data-page="contacts02" href="{% url 'account_signup' %}">Hesap Oluştur</a>
+                                        </li>
+                                    </ul>
+                                </div> 
+                            </li>
+                                {% endif %}
+                           
+                        </ul>
+                    </nav>
+                    <ul class="socials d-flex align-items-center">
+                        <li class="list-item">
+                            <a class="link" href="">
+                                <i class="icon-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a class="link" href="">
+                                <i class="icon-instagram"></i>
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a class="link" href="">
+                                <i class="icon-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a class="link" href="">
+                                <i class="icon-whatsapp"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="header_trigger d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas">
+                    <i class="icon-stream"></i>
+                </button>
+            </div>
+        </header>
+         
+    
+        
+   
+    
+    {% if messages %}{% for message in messages %}
+        <div  id="kapat"   style="margin: 10px 0;padding: 10px;border-radius: 3px 3px 3px 3px;color:#059;background-color:#BEF;"><div style="margin:10px">
+             <i  title="Kapat" class="fa fa-info-circle"></i>
+  {{message}} <i onclick="kapatıver()"  style="float:right;" title="Kapat" class='bx bx-x-circle'></i>
+        </div>
+ 
+</div>  {% endfor %}
+{% endif %}
+    {% block content %}
+        
+    {% endblock content %}
+            <!-- homepage content end -->
+        <footer class="footer accent">
+            <div class="container">
+                <div class="footer_main d-sm-flex flex-wrap flex-lg-nowrap justify-content-between">
+                    <div class="footer_main-block footer_main-block--about col-sm-7 col-lg-auto d-flex flex-column">
+                        <a class="brand d-flex align-items-center" href="#upp">
+                            <span class="brand_logo theme-element">
+                                <img id="brandHeader" width="44" height="45" viewBox="0 0 44 45" fill="none" src="{% static "img/logo-light.svg" %}">
+                            </span>
+                            <span class="brand_name">EnglishBerry</span>
+                        </a>
+                        <p class="footer_main-block_text">
+                            Hergün pratik yaparak Ingilizce öğrenebilirsin. 
+                        </p>
+                    </div>
+                    <div class="footer_main-block footer_main-block--nav col-sm-6 col-lg-auto">
+                        <h4 class="footer_main-block_header">Hızlı Erişim</h4>
+                        <ul class="footer_main-block_nav d-flex flex-lg-column">
+                            <li class="list-item">
+                                <a class="link underlined underlined--white nav-item" data-page="home" href="/">Anasayfa</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="link underlined underlined--white nav-item" data-page="about" href="{% url 'about' %}">Hakkımızda</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="link underlined underlined--white nav-item" data-page="rooms" href="{% url 'posts' %}">Videolar</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="link underlined underlined--white nav-item" data-page="rooms" href="{% url 'yazilar' %}">Makaleler</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="link underlined underlined--white nav-item" data-page="news" href="{% url 'contact' %}">İletişim</a>
+                            </li>
+                        </ul>
+                    </div>
+                     
+                    <div class="footer_main-block footer_main-block--follow col-sm-5 col-lg-auto d-flex flex-column">
+                        <h4 class="footer_main-block_header">Bağlantılarımız</h4>
+                        <p class="footer_main-block_text">Sosyal medya bağlantılarımızdan bizi takip edebilirsiniz</p>
+                        <ul class="socials d-flex align-items-center">
+                            <li class="list-item">
+                                <a class="link" target="_blank" href="https://www.facebook.com/englishberry/">
+                                    <i class="icon-facebook"></i>
+                                </a>
+                            </li>
+                            <li class="list-item">
+                                <a class="link" target="_blank" href="https://www.instagram.com/englishberry/">
+                                    <i class="icon-instagram"></i>
+                                </a>
+                            </li>
+                            <li class="list-item">
+                                <a class="link" target="_blank" href="https://twitter.com/englishberry">
+                                    <i class="icon-twitter"></i>
+                                </a>
+                            </li>
+                             
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_copyright">
+                <div class="container">
+                    <p class="footer_copyright-text">
+                        <span class="linebreak"> EnglishBerry&copy; EnglishBerry </span>
+                        <span class="linebreak">All rights reserved Copyrights 2022</span>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        <script src="{% static 'js/common.min.js' %}"></script>
+        <script src="{% static 'js/index.min.js' %}"></script>
+        <script src="{% static 'js/gallery.min.js' %}"></script>
+   {% block script_area %}
+       
+   {% endblock script_area %}
+    </body>
+</html>

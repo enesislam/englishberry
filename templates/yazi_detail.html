@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_file %}
+   <link rel="stylesheet" type="text/css" href="{% static "css/room.css" %}"> 
+   <link rel="stylesheet" type="text/css" href="{% static "css/room.min.css" %}"> 
+{% endblock css_file %}
+{% block content %}
+    
+        <main>
+            <!-- room section start -->
+            <div class="room section">
+                <div class="container">
+                    <div class="room_main d-lg-flex flex-wrap align-items-start">
+                        <div class="room_main-slider col-12 d-lg-flex">
+                            <div class="room_main-slider_view col-lg-8">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                    <picture>
+                                        <source data-srcset="{{yazi.image.url}}" srcset="{{yazi.image.url}}" />
+                                        <img class="lazy" data-src="{{yazi.image.url}}" src="{{yazi.image.url}}" alt="media" />
+                                    </picture>
+                                    </div>
+                                     
+                                </div>
+                                 
+                            </div>
+                        
+                        </div>
+                        <div class="room_main-info col-lg-8">
+                            <div class="amenities d-flex flex-wrap align-items-center">
+                                <span class="amenities_item d-inline-flex align-items-center">
+                                    <i class="icon-user icon"></i>
+                                    Etiket:  {{yazi.tags}}
+                                </span>
+                                <span class="amenities_item d-inline-flex align-items-center">
+                                    <i class="icon-calendar icon"></i>
+                                    Tarih:{{yazi.date_added}}
+                                </span>
+                                 
+                            </div>
+                            <div class="description">
+                                <h1 class="description_text">
+                                  {{yazi.title}}
+                                </h1>
+                                <br>
+                                <br>
+                            </div>
+                            <div class="description">
+                                <p class="description_text">
+                                  {{yazi.text}}
+                                </p>
+                                
+                            </div>
+                            
+                        </div>
+                         
+                    
+                    </section>
+                </div>
+            </div> 
+            
+            <!-- rooms section end -->
+            <!-- single room content start -->
+        </main>
+         {% endblock content %}

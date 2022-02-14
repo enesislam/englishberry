@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_file %}
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<style type="text/css">
+ /* http://waitanimate.wstone.io/#!/ */
+.vibrate {
+  animation: shake-animation 6s ease 
+  infinite;
+    transform-origin: 50% 50%;
+}
+
+
+
+
+@keyframes shake-animation {
+   0% { transform:translate(0,0) }
+  1.78571% { transform:translate(5px,0) }
+  3.57143% { transform:translate(0,0) }
+  5.35714% { transform:translate(5px,0) }
+  7.14286% { transform:translate(0,0) }
+  8.92857% { transform:translate(5px,0) }
+  10.71429% { transform:translate(0,0) }
+  100% { transform:translate(0,0) }
+}
+    .profile {
+    margin: auto;
+    background-color: #fff;
+    border-radius: 40px;
+    width: 480px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 30px;
+        border: 15px solid rgba(#f6f2ff, 0.7);
+        object-fit: cover;
+    }
+    .name {
+        margin-top: 24px;
+        font-size: 22px;
+        font-weight: bold;
+    }
+    .details {
+        font-size: 13px;
+        font-weight: 400;
+        width: 50%;
+        margin-top: 8px;
+        line-height: 1.3;
+        text-align: center;
+    }
+    .buttons {
+        display: flex;
+        align-items: center;
+        margin-top: 50px;
+        .message {
+            background-color: #ffedd2;
+        }
+        .follow {
+            background: linear-gradient(
+                90deg,
+                rgba(#fa3967, 1) 0%,
+                rgba(#fa9639, 1) 100%
+            );
+        }
+        .button {
+            width: 186px;
+            height: 54px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 12px;
+            cursor: pointer;
+            &:first {
+                margin-left: 0px;
+            }
+
+            svg {
+                height: 22px;
+                margin-right: 4px;
+            }
+        }
+    }
+}
+.avatar {
+    padding: .3em;
+  margin-left: .3em;
+  margin-top: .3em;
+  height: 8.23em;
+  width: 8.23em;
+  border-radius: 81em;
+}
+
+
+
+.hidden {
+    display:none;
+} 
+</style>
+{% endblock css_file %}
+{% block content %}
+{% load account %}            
+<main>
+    <div class="profile">
+<form name="upload-image" id="uploadPP">
+
+         <input type="file" accept="image/png, image/gif, image/jpeg, image/jpg" class="hidden" id="uploadFile"/>
+ </form>
+ <div id="preview" >
+     
+ </div>
+        <div style=" text-align:right;">
+            <i id='uploadTrigger' style="border-radius:25px;border:2px black 
+            solid;padding:3px;cursor:pointer;position:absolute;" title="Düzenle" class=' bx bxs-pencil'></i>
+          {% for i in user_pp_statue  %}
+          <img class="avatar" id="avatar" src="{{i.image.url}}" alt=" " />
+          {% endfor %}
+    </div>
+       
+         
+
+ 
+       
+
+        <span style="margin-top: 24px;font-size: 45px;font-weight: bold;">
+            @{% user_display user %}
+        </span>
+        <span style=" font-size: 17px;font-weight: 400;width: 50%;margin-top: 8px;line-height: 1.3;text-align: center;" id="bio">
+            <form autocomplete="off" style="background-color:#ffedd2; border-radius:18px; margin-bottom: 5px;" id="add-bio" action="add_bio" method="POST">
+                <input style="font-family: inherit;
+                  width: 100%;
+                  border: 0;
+                  border-bottom: 1px solid black;
+                  outline: 0;
+                  color: black;
+                  padding: 10px 0;
+                  background: transparent;
+                  transition: border-color 0.2s;
+                  text-align:center;
+                  " type="input" maxlength="50"class="form__field" placeholder="Bio ekle" value="{% if user_bio_statue == None %}{% elif user_bio_statue %}{% for i in user_bio_statue  %}{{i.text}}{% endfor %}{% endif %}" name="name" id='bio_text' required />
+                  <button style="background-color:#83c99e; color:#111f16; border-radius:7px;margin:4px;padding:4px;" type="submit" name="submit"
+                  value="submit">Kaydet</button>
+              </form>
+
+              {% if user_bio_statue == None %}Bio Ekle
+                <i id='ifUneedThenAdd' class='bx bx-plus-medical'></i>
+                  {% elif user_bio_statue %}
+                  <b id='bionun_texti'> {% for i in user_bio_statue  %}
+                    {{i.text}}
+                {% endfor %}</b>
+                <i id='ifUneedThenAdd' style="cursor:pointer;" class='bx bxs-pencil'></i>
+            {% endif %}
+        </span>
+         
+</div>
+            <!-- benefits section start -->
+            <section class="about_benefits section">
+                <div class="container">
+                   
+                     {% if like %}
+                    <section id="dersler" class="rooms section--blockbg section--nopb">
+                <div class="block"></div>
+                <div class="container">
+                    <div class="rooms_header d-sm-flex justify-content-between align-items-center">
+                        <h2  class="rooms_header-title" data-aos="fade-right">  Beğendiklerim</h2>
+                        <div class="wrapper" data-aos="fade-left">
+                            <a class="btn theme-element theme-element--light" href="{% url 'begendiklerim' %}">Tümünü gör</a>
+                        </div>
+                    </div>
+                    <ul class="rooms_list d-md-flex flex-wrap">
+                        {% for post in like  %}
+ 
+                        <li class="rooms_list-item col-md-6 col-xl-4" data-order="1" data-aos="fade-up"><a href="{% url 'post-detail' post.slug %}">
+                            <div class="item-wrapper d-md-flex flex-column">
+                                <div class="media">
+                                    <picture>
+                                        <source data-srcset="{{post.image.url}}" srcset="{{post.image.url}}" />
+                                        <img class="lazy" data-src="{{post.image.url}}" src="{{post.image.url}}" alt="media" />   
+                                    </picture>
+                                    
+                                </div>
+                                <div class="main d-md-flex flex-column justify-content-between flex-grow-1">
+                                    <a class="main_title h5" href="{% url 'post-detail' post.slug %}" data-shave="true">{{post.title}}</a> 
+                                    <div class="main_amenities">
+                                        <span class="main_amenities-item d-inline-flex align-items-center">
+                                            <a href="{{post.get_cat_url}}">Kategori:{{post.category}}</a>
+                                                
+                                        </span>
+                                        
+                                    </div>
+
+                                    <a class="link link--arrow d-inline-flex align-items-center" href="{% url 'post-detail' post.slug %}">
+                                        İzle
+                                        <i class="icon-arrow_right icon"></i>
+                                    </a>
+                                </div>
+                            </div></a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </section> 
+                     
+                    {% endif %}<br><br><hr data-aos="fade-left"><br>
+                    {% if sorduklarim %}  
+                    <div id="eff">
+                        <h3 id=" output" data-aos="fade-left">Sorduklarım</h3>
+                        <h5 style="margin-bottom:5px;" id="edit-click">Düzenlemek için tıkla</h5>
+                    </div>
+                    <div id="questionss" style="font-size:19px; margin:5px;">
+                    {% for soru in sorduklarim %}<br>
+                    <span  class="main_amenities-item d-inline-flex align-items-center">
+                        <a><i name="{{ soru.id }}" id="co" class='likin bx bxs-message-rounded-detail'><b> {{soru.text|truncatewords:4}}</b>
+                        </i></a>
+                    </span>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </section> 
+        </main>
+  <script type="text/javascript">
+    $("#edit-click").click(function(){
+         $(this).html('Silme modu açık')
+        $('#questionss i').removeClass('bxs-message-rounded-detail')
+        $('#questionss i').addClass('bx-message-rounded-x vibrate')
+$(".likin","span > a").click(function(){
+    $.ajax({
+             type: "POST",
+             url: "{% url 'account_profile' %}",
+             data: {'content_id': $(this).attr('name'),'csrfmiddlewaretoken': '{{ csrf_token }}','operation':'delete_soru'},
+             dataType: "json",
+             success: function(response) {
+                selector = document.getElementsByName(response.content_id);
+                $(selector).html(response.msg)
+                 
+
+                 if (response.bos_gari){
+                        $('#eff').html("<div id='eff'><h3 data-aos='fade-left' > </h3><h4>"+ response.msg+"</h4> </div>")
+                          function hide_itt(){
+ 
+                 $('#eff').hide();
+            }
+                        setTimeout(hide_itt, 3200);
+                 }
+                function hide_it(){
+                 $(selector).html('');
+                 $(selector,"span > a").removeAttr("class");
+                 $(selector,"span > a").removeAttr("name");
+                 $(selector).removeAttr("class");
+            }
+                setTimeout(hide_it, 500);
+            }
+        });
+    })
+});
+</script>
+<script type="text/javascript">
+$('#add-bio').hide()
+$('#ifUneedThenAdd').click(function(){
+    $('#add-bio').show()
+});
+$('#add-bio').on('submit', function(e){
+    e.preventDefault();
+           $.ajax({
+                type : "POST", 
+                url: "{% url 'account_profile' %}",
+                data: {
+                    text:$('#bio_text').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    dataType: "json",
+                    'operation':'add_bio'
+                },
+                
+                success: function(data){
+                    console.log(data)
+                $('#output').hide()
+                $('#output2').show()
+                $('#bionun_texti').html(data.bio)
+                 $('#add-bio').hide()
+
+
+             }
+                ,
+                failure: function() {
+               }
+         });
+});
+</script>
+<script type="text/javascript">
+$("#uploadTrigger").click(function(){
+   $("#uploadFile").click();
+});
+$('#uploadFile').on('change', function(){
+    var data = new FormData();
+    data.append("image", $("input[id^='uploadFile']")[0].files[0]);
+    data.append("csrfmiddlewaretoken", "{{ csrf_token }}");       
+    data.append("operation", "add_pp");       
+ 
+        $.ajax({
+            method: "POST",
+            url: "{% url 'account_profile' %}",
+            processData: false,
+            contentType: false,
+            mimeType: "multipart/form-data",
+            data: data,
+            success: function(a) {
+            let object = JSON.parse(a) 
+                $('#avatar').attr('src', object['pp'])
+                $( "#avatar" ).load(window.location.href + " #avatar" );
+                console.log(object['pp'])
+            },
+
+        })
+        
+}); 
+ 
+</script>
+{% endblock content %}

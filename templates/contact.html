@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_file %}
+            <link rel="stylesheet" href="{% static "css/contacts.min.css" %}" />
+<script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
+{% endblock css_file %}
+{% block content %}
+    
+        
+        <main>
+            <!-- contact info section start --><section class="contacts_secondary section">
+                <div class="container d-xl-flex align-items-center justify-content-between">
+                    <div class="contacts_secondary-rating">
+                        <h2 class="contacts_secondary-header">English Berry — İngilizce Öğrenme Platformu </h2>
+                        <div class="rating">
+                            <div class="container">
+                                 
+                            </div>
+                        </div>
+                    </div>
+                    <div  class="contacts_secondary-form" data-aos="fade-up">
+                        <div id="output" class="contacts" data-aos="fade-up">
+                            <div class="contacts_header">
+                                <h2 class="contacts_header-title">Bir problem mi yaşıyorsun?</h2>
+                                <p class="contacts_header-text">
+                                     Buradan bize bildir.
+                                </p>
+                            </div>
+                            <form
+                                class="contacts_form form d-sm-flex flex-wrap justify-content-between"
+                                action="post"
+                                method="post"
+                                id="form"
+                                data-type="feedback"
+                            >
+
+                            {% if user.is_authenticated %}
+                               
+                                <input class="field required" value="{{request.user.username}}" id="feedbackName" type="hidden" placeholder="" />
+                             
+                            {% else %}
+                            <div class="field-wrapper">
+                                <label class="label" for="name">
+                                    <i class="icon-user icon"></i>
+                                </label>
+                               <input class="field required" id="name" type="text" placeholder="İsminizi girin veya Hesap oluşturun" />
+                            </div>
+
+                            
+                                       
+                                   {% endif %}
+
+                                 
+
+                                <div class="field-wrapper">
+                                    <label class="label" for="email">
+                                        <i class="icon-email icon"></i>
+                                    </label>
+                                    <input class="field required" id="email" type="email" data-type="email" placeholder="Mail" />
+                                </div>
+                                <textarea class="field textarea required" id="text" placeholder="Mesaj"></textarea>
+                                <button class="btn theme-element theme-element--accent" type="submit">Gönder</button>
+                            </form>
+                             
+       
+                        </div>
+                        <div id="output2"  class="contacts" data-aos="fade-up">
+                            <h2 id="my_msg" class="contacts_header-title">Bir problem mi yaşıyorsun?</h2> <br><p>Mesaj:<b id='my_txt'></b>
+                                <br>
+                            </p>
+                            <p>Gönderen: <b id="my_nme"></b></p>
+                            <p>E-Posta: <b id="my_mail"></b></p>
+                            <br>
+                            <button class="btn theme-element theme-element--accent" id="refresh_message_page">Tekrar Dene</button>
+                        </div>
+                    </div>
+                </div>
+            <section class="contacts_main section">
+                <div class="container container--contacts d-xl-flex align-items-center">
+                    <div class="contacts_info col-xl-7" data-aos="fade-up">
+                        <div class="contacts_info-header">
+                            <h2 class="contacts_info-header_title">Bağlantılar</h2>
+                            <p class="contacts_info-header_text">
+                                Bize bu bağlantılardan ulaşabilirsiniz
+                            </p>
+                        </div>
+                        <div class="contacts_info-main">
+                             
+                            <div class="contacts_info-main_block d-sm-flex align-items-start">
+                                <i class="icon-email icon"></i>
+                                <div class="wrapper d-flex flex-column">
+                                    <a class="link" href="mailto:example@domain.com">englishberry@gmail.com</a>
+                                    <a class="link" href="mailto:example@domain.com">englishberry22@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                         
+                    </div>
+                    
+                </div>
+            </section>
+            <!-- contact info section end -->
+            <!-- contact form section start -->
+            
+            </section>
+            <!-- contact form section end -->
+        </main>
+        <script src="{% static "js/common.min.js" %}"></script>
+ <script type="text/javascript">
+$('#output2').hide()
+
+  $('#form').on('submit', function(e){
+             
+         e.preventDefault();
+         
+           $.ajax({
+                type : "POST", 
+                url: "{% url 'sorusor' %}",
+                data: {
+                    email:$('#email').val(),
+                    text:$('#text').val(),
+                    name:$('#name').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    dataType: "json",
+                },
+                
+                success: function(data){
+                $('#output').hide()
+                $('#output2').show()
+                $('#my_msg').html(data.msg)
+                $('#my_txt').html(data.text)
+                $('#my_nme').html(data.name)
+                $('#my_mail').html(data.email)
+                if (data.gech) {
+                    $('#refresh_message_page').html('Başka bir Mesaj Gönder')
+                }
+                 $('#refresh_message_page').click( function (){
+                
+                 $('#output').show()
+                 $('#output2').hide()
+                });
+             }
+                ,
+                failure: function() {
+               }
+         });
+});
+</script>
+ {% endblock content %}
+

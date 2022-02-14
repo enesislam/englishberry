@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_file %}
+            <link rel="stylesheet" href="{% static "css/about.min.css" %}" />
+<script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
+{% endblock css_file %}
+{% block content %}
+    
+                    
+        <main>
+            
+            <!-- benefits section start -->
+            <section class="about_benefits section">
+                <div class="container">
+                    <div class="about_benefits-header d-md-flex align-items-center justify-content-between">
+                        <h2 class="about_benefits-header_title" data-aos="fade-up">Hakkımızda</h2>
+                    </div> 
+                    <br>
+                    {% for hakkimiz in hakkimizda %}
+                    <p data-aos="fade-left">{{hakkimiz.text}} </p>
+                        
+                    {% endfor %}
+
+                </div>
+            </section>
+      
+            <!-- rules section start -->
+            <section class="about_rules section">
+                <div class="container d-xl-flex justify-content-between align-items-center">
+                    <div class="about_rules-main col-xl-5">
+                        <h3 class="about_rules-main_header" data-aos="fade-right">İngilizce Öğrenmek için bir kaç Temel İpucu </h3>
+                        <ul class="about_rules-main_list">
+                            <li id="soeu" class="list-item d-flex align-items-baseline" data-aos="fade-up">
+                                <i class="icon-check icon"></i>
+                                 Sonuç odaklı değil, süreç odaklı bakış açısı edinin<br>
+                            </li>
+                            <li  class="list-item d-flex align-items-baseline" data-aos="fade-up">
+                                <i class="icon-check icon"></i>
+                                 Cesur olun<br>
+                            </li>
+                            <li class="list-item d-flex align-items-baseline" data-aos="fade-up">
+                                <i class="icon-check icon"></i>
+                                Sağlam bir sözlük edinin<br>
+                            </li>
+                            <li class="list-item d-flex align-items-baseline important" data-aos="fade-up">
+                                <i class="icon-check icon"></i>
+                                 Gramer konularına takılıp kalmayın<br>
+                            </li>
+                        </ul>
+                    </div>
+                     
+                    <div id="output" class="contacts col-xl-6"  data-aos="fade-up">
+                        <div   class="contacts_header">
+                            <h2 class="contacts_header-title" style="padding:10px;">Sorun mu var? Cevaplayalım</h2>
+                            <p class="contacts_header-text">
+                                Sorularınıza en kısa sürede cevap vermeye çalışacağız
+                            </p>
+                        </div>
+                        <form
+                            class="contacts_form form d-sm-flex flex-wrap justify-content-between"
+                            action="post"
+                            method="post"
+                            id="form"
+                            data-type="feedback"
+                            style="padding:15px;"
+                        > 
+                   
+                                {% if user.is_authenticated %}
+                               
+                                <input class="field required" value="{{request.user.username}}" id="feedbackName" type="hidden" placeholder="" />
+                             
+                            {% else %}
+                            <div class="field-wrapper">
+                                <label class="label" for="name">
+                                    <i class="icon-user icon"></i>
+                                </label>
+                               <input class="field required" id="name" type="text" placeholder="İsminizi girin veya Hesap oluşturun" />
+                            </div>
+
+                            
+                                       
+                                   {% endif %}
+                            <div class="field-wrapper">
+                                <label class="label" for="feedbackEmail">
+                                    <i class="icon-email icon"></i>
+                                </label>
+                                
+                                
+                                <input class="field required"id="email" type="email"  data-type="email" placeholder="E posta adresi" />
+                            </div>
+                            <textarea class="field textarea required" id="text" type="text" placeholder="Mesaj"></textarea>
+                            <button class="btn theme-element theme-element--accent" type="submit">Gönder</button>
+                        </form>
+                    </div>
+                    <div id="output2"  class="contacts col-xl-6"  data-aos="fade-up">
+                            <h2 id="my_msg" class="contacts_header-title"></h2><br><p>Mesaj:<b id='my_txt'></b>
+                                <br>
+                            </p>
+                            <p>Gönderen: <b id="my_nme"></b></p>
+                            <p>E-Posta: <b id="my_mail"></b></p>
+                            <br>
+                            <button class="btn theme-element theme-element--accent" id="refresh_message_page">Tekrar Dene</button>
+                        </div>
+                </div>
+            </section>
+            <!-- rules section end -->
+            <!-- FAQ section start -->
+            {% if posts %}
+                
+            <section class="about_faq section">
+                <div class="container">
+                    <div class="about_faq-header d-lg-flex justify-content-between align-items-center">
+                        <h2 class="about_faq-header_title">Çok Sorulan Sorular</h2>
+                        <p class="about_faq-header_text">Cevapları kısaca yazdık. Detaylı şekilde YouTube kanalımızda izleyebilirsiniz. </p>
+                    </div>
+                    <div class="about_faq-main d-grid">
+                        <!-- item 1 -->
+                        {% for post in posts  %}
+                            <div class="accordion_component-item">
+                            <div class="item-wrapper d-flex flex-column justify-content-between">
+                                <h4
+                                    class="accordion_component-item_header d-flex justify-content-between align-items-center collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#item-{{post.id}}"
+                                    aria-expanded="true"
+                                >
+                                   {{post.title}}
+                                    <span class="wrapper">
+                                        <i class="icon-chevron_down icon transform"></i>
+                                    </span>
+                                </h4>
+                                <div id="item-{{post.id}}" class="accordion-collapse collapse show">
+                                    <div class="accordion_component-item_body">
+                                       <p> {{post.paragraf1}}</p>
+                                       {% if post.paragraf2 %}
+                                            <br>
+                                       <p> {{post.paragraf2}}</p>
+                                       {% endif %}  
+                                      {% if post.paragraf3 %}
+                                            <br>
+                                       <p> {{post.paragraf3}}</p>
+                                       {% endif %} 
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        {% endfor %}
+                        
+
+
+
+                    </div>
+                </div>
+            </section>
+                        {% endif %}
+
+            <!-- FAQ section end -->
+            <!-- footer section start -->
+            <section class="about_footer section">
+                <div class="container d-md-flex flex-wrap justify-content-between">
+                    <div class="about_footer-block about_footer-block--quote d-md-flex align-items-center">
+                        <div class="media" data-aos="fade-right">
+                            <picture>
+                                <source data-srcset="{% static "img/placeholder.jpg" %}" srcset="{% static "img/placeholder.jpg" %}" />
+                                <img class="lazy" data-src="{% static "img/placeholder.jpg" %}" src="{% static "img/placeholder.jpg" %}" alt="media" />
+                            </picture>
+                        </div>
+                        <div class="main">
+                            <q class="main_quote h4" data-aos="fade-left">
+                                You will win if you don't quit.
+                            </q>
+                            <div class="main_author d-flex flex-column flex-md-row">
+                                <span style="color:white" class="name" data-aos="fade-left" data-aos-delay="50">Johnathan Jennings</span>
+                                <span class="profession h6" data-aos="fade-left" data-aos-delay="100"
+                                    >Anonim</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                     
+                    <div class="about_footer-block about_footer-block--subscribe d-lg-flex flex-column justify-content-between">
+                        <h4 class="about_footer-block_header" data-aos="fade-left">E-Bülten Aboneliği</h4>
+                        <p class="about_footer-block_text flex-grow-1" data-aos="fade-left" data-aos-delay="50">
+                            Abone olarak yayınlarımızdan ve faaliyetlerimizden anlık olarak haberdar olabilirsiniz.
+                        </p>
+                        <form class="form d-flex" action="#" method="post" data-type="subscribe" data-aos="fade-left" data-aos-delay="100">
+                            <input class="field required" type="text" data-type="email" placeholder="Mail adresiniz" />
+                            <button class="btn theme-element--accent" type="submit">
+                                <i class="icon-arrow_right icon"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <!-- footer section end -->
+        </main>
+        <div class="video d-flex align-items-center justify-content-center">
+            <div class="container">
+                <div class="video_frame d-flex align-items-center justify-content-center">
+                    <i class="icon-close video_frame-close"></i>
+                    <div id="player"></div>
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}
+{% block script_area %}
+<script type="text/javascript">
+$('#output2').hide()
+
+  $('#form').on('submit', function(e){
+             
+         e.preventDefault();
+         
+           $.ajax({
+                type : "POST", 
+                url: "{% url 'sorusor' %}",
+                data: {
+                    name:$('#name').val(),
+                    email:$('#email').val(),
+                    text:$('#text').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    dataType: "json",
+                },
+                
+                success: function(data){
+                $('#output').hide()
+                $('#output2').show()
+                $('#my_msg').html(data.msg)
+                $('#my_txt').html(data.text)
+                $('#my_nme').html(data.name)
+                $('#my_mail').html(data.email)
+                if (data.gech) {
+                    $('#refresh_message_page').html('Başka bir Mesaj Gönder')
+                }
+                 $('#refresh_message_page').click( function (){
+                
+                 $('#output').show()
+                 $('#output2').hide()
+                });
+             }
+                ,
+                failure: function() {
+               }
+         });
+});
+</script>
+{% endblock script_area %}

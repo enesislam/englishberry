@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block data_page %}
+   {{data_page}}
+ 
+{% endblock data_page %}
+{% block content %}
+        <!-- homepage content start -->
+        <main>
+            <!-- hero section start -->
+            <section class="hero section" id="upp">
+                <div class="container container--hero d-lg-flex align-items-center justify-content-between">
+                    <div class="hero_main">
+                        <h1 class="hero_main-title" data-aos="fade-up">English Berry — İngilizce Öğrenme Platformu</h1>
+                        <div class="hero_main-content d-flex">
+                            <span class="line" data-aos="fade-up" data-aos-delay="50"></span>
+                            <p class="text" data-aos="fade-up" data-aos-delay="100">
+                                Hergün pratik yaparak İngilizce öğrenebilirsin.
+                            </p>
+
+                        </div>
+                       <div class="wrapper" data-aos="fade-left">
+                                <a class="about_main-action_item btn theme-element theme-element--accent" href="#dersler">İzle</a>
+                            </div>
+                    </div>
+                    <div class="hero_media" data-aos="zoom-in">
+                        <picture>
+                            <source data-srcset="{%static 'img/main.jpg'%}" srcset="{%static 'img/main.jpg'%}" />
+                            <img class="lazy" data-src="{%static 'img/main.jpg'%}" src="{%static 'img/main.jpg'%}" alt="media" />
+                        </picture>
+                    </div>
+                </div>
+            </section>
+            <!-- hero section end -->
+            <!-- rooms section start -->
+            <section id="dersler" class="rooms section--blockbg section--nopb">
+                <div class="block"></div>
+                <div class="container">
+                    <div class="rooms_header d-sm-flex justify-content-between align-items-center">
+                        <h2  class="rooms_header-title" data-aos="fade-right">Son Eklenenler</h2>
+                        <div class="wrapper" data-aos="fade-left">
+                            <a class="btn theme-element theme-element--light" href="{% url 'posts' %}">Tüm dersleri gör</a>
+                        </div>
+                    </div>
+                    <ul class="rooms_list d-md-flex flex-wrap">
+                        {% for post in posts  %}
+
+                        <li class="rooms_list-item col-md-6 col-xl-4" data-order="1" data-aos="fade-up"><a href="{% url 'post-detail' post.slug %}">
+                            <div class="item-wrapper d-md-flex flex-column">
+                                <div class="media">
+                                    <picture>
+                                        <source data-srcset="{{post.image.url}}" srcset="{{post.image.url}}" />
+                                        <img class="lazy" data-src="{{post.image.url}}" src="{{post.image.url}}" alt="media" />   
+                                    </picture>
+                                    
+                                </div>
+                                <div class="main d-md-flex flex-column justify-content-between flex-grow-1">
+                                    <a class="main_title h4" href="{% url 'post-detail' post.slug %}" data-shave="true">{{post.title}}</a><i class='likin bx bxs-like'>{{post.total_likes}} Beğeni</i> 
+                                    <div class="main_amenities">
+                                        <span class="main_amenities-item d-inline-flex align-items-center">
+                                            <a href="{{post.get_cat_url}}">Kategori:{{post.category}}</a>
+                                                
+                                        </span>
+                                        
+                                    </div>
+
+                                    <a class="link link--arrow d-inline-flex align-items-center" href="{% url 'post-detail' post.slug %}">
+                                        İzle
+                                        <i class="icon-arrow_right icon"></i>
+                                    </a>
+                                </div>
+                            </div></a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </section>
+            <!-- rooms section end -->
+            <!-- about section start -->
+            <section class="about section">
+                <div class="container container--about d-xl-flex align-items-center">
+                    <div class="about_main"><ul class="about_main-list d-sm-flex flex-wrap">
+                             
+                             
+                        </ul>
+                        <h2 class="about_main-header" data-aos="fade-up"> Çok çalışmak mı? veya sürekli çalışmak mı?
+</h2>
+                        <p class="about_main-text" data-aos="fade-up">
+                           It’s those who are earlier than the others, those who put in more effort, who can enjoy the feelings of success. /
+
+                           <br> <br> Başarı hissinin tadını çıkarabilenler, başkalarından daha erken başlayanlar ve daha fazla çaba sarf edenlerdir.
+
+                        </p>
+                        
+                        <div class="about_main-action d-flex flex-column-reverse flex-sm-row align-items-center">
+                            <div class="wrapper" data-aos="fade-left">
+                                <a class="about_main-action_item btn theme-element theme-element--accent" href="{% url 'posts' %}"> Başla<i class="icon-arrow_right icon"></i></a>
+                            </div>
+                             
+                        </div>
+                    </div>
+                    <div class="about_media" data-aos="zoom-in">
+                        <picture>
+                            <source data-srcset="https://i.ytimg.com/vi_webp/JClap8zgC4E/sddefault.webp" srcset="https://i.ytimg.com/vi_webp/JClap8zgC4E/sddefault.webp" />
+                            <img class="lazy" data-src="https://i.ytimg.com/vi_webp/JClap8zgC4E/sddefault.webp" src="https://i.ytimg.com/vi_webp/JClap8zgC4E/sddefault.webp" alt="media" />
+                        </picture>
+                        <a class="video-play d-inline-flex align-items-center justify-content-center" href="#">
+                            <i class="icon-play icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <!-- about section end -->
+            <!-- rating section start -->
+            <hr>
+            
+            <!-- reviews section end -->
+            <!-- promo section start -->
+             {% if yazilar %}
+                
+            <section class="latest section section--blockbg">
+                <div class="block"></div>
+                <div class="container">
+                    <div class="latest_header d-sm-flex justify-content-between align-items-center">
+                        <h2 class="latest_header-title" data-aos="fade-right">Makaleler</h2>
+                        <div class="wrapper" data-aos="fade-left">
+                            <a class="btn theme-element theme-element--light" href="{% url 'yazilar' %}">Tümünü gör</a>
+                        </div>
+                    </div>
+                    <ul class="latest_list d-md-flex flex-wrap">
+                                {% for post in yazilar %}
+                        <li class="latest_list-item col-md-6 col-xl-4" data-order="1" data-aos="fade-up">
+                            <div class="item-wrapper d-md-flex flex-column">
+                                <div class="media">
+                                    <picture>
+                                        <source data-srcset=" {{post.image.url}}" srcset="{%static 'img/placeholder.jpg'%}" />
+                                        <img class="lazy" data-src="{{post.image.url}}" src="{{post.image.url}}" alt="media" />
+                                    </picture>
+                                    <span class="media_label media_label--left"> {{post.tags}} </span>
+                                </div>
+                                <div class="main d-md-flex flex-column justify-content-between flex-grow-1">
+                                    <a class="main_title h4" href="{% url 'yazi_detail' post.id %}" data-shave="true">{{post.title}}</a>
+                                    <p class="main_preview">
+                                        {{post.text|truncatewords:15}}
+                                    </p>
+                                    <div class="main_metadata">
+                                        <span class="main_metadata-item d-inline-flex align-items-center">
+                                            <i class="icon-calendar icon"></i>
+                                            {{post.date_added}}
+                                        </span>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </li> 
+
+                            
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+            {% endif %}
+            <!-- news section end -->
+            <!-- contacts section start -->
+            <section class="contacts section">
+                <div class="container container--contacts d-xl-flex align-items-center">
+                    <div class="contacts_info">
+                        <div class="contacts_info-header">
+                            <h2 class="contacts_info-header_title" data-aos="fade-down">İletişim</h2>
+                            <p class="contacts_info-header_text" data-aos="fade-up">
+                             Bu adreslerden bize ulaşabilirsiniz       
+                            </p>
+                        </div>
+                        <ul class="contacts_info-list col-xl-7 d-md-flex flex-wrap">
+                            <li class="contacts_info-list_item col-md-6 d-flex align-items-center" data-order="1" data-aos="fade-up">
+                                <span class="theme-element theme-element--light media">
+                                    <span class="icon-call icon">
+                                        <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M26.9609 19.75L21 17.1797C20.7812 17.125 20.5625 17.0703 20.3438 17.0703C19.7969 17.0703 19.3047 17.2891 19.0312 17.6719L16.625 20.625C12.7969 18.7656 9.73438 15.7031 7.875 11.875L10.8281 9.46875C11.2109 9.19531 11.4297 8.70312 11.4297 8.15625C11.4297 7.9375 11.375 7.71875 11.3203 7.5L8.75 1.53906C8.47656 0.9375 7.875 0.5 7.21875 0.5C7.05469 0.5 6.94531 0.554688 6.83594 0.554688L1.3125 1.86719C0.546875 2.03125 0 2.6875 0 3.50781C0 17.3438 11.2109 28.5 24.9922 28.5C25.8125 28.5 26.4688 27.9531 26.6875 27.1875L27.9453 21.6641C27.9453 21.5547 27.9453 21.4453 27.9453 21.2812C27.9453 20.625 27.5625 20.0234 26.9609 19.75ZM24.9375 26.75C12.1406 26.75 1.75 16.3594 1.75 3.5625L7.16406 2.30469L9.67969 8.15625L5.6875 11.4375C8.36719 17.0703 11.4297 20.1328 17.1172 22.8125L20.3438 18.8203L26.1953 21.3359L24.9375 26.75Z"
+                                                fill="currentColor"
+                                            />
+                                        </svg>
+                                    </span>
+                                </span>
+                                <div class="main d-flex flex-column">
+                                    <h4 class="main_title">Telefon</h4>
+                                    <a class="link" href="tel:+1234567890">(329) 580-7077</a>
+                                    <a class="link" href="tel:+1234567890">(650) 382-5020</a>
+                                </div>
+                            </li>
+                            <li class="contacts_info-list_item col-md-6 d-flex align-items-center" data-order="2" data-aos="fade-up">
+                                <span class="theme-element theme-element--light media">
+                                    <i class="icon-email icon"></i>
+                                </span>
+                                <div class="main d-flex flex-column">
+                                    <h4 class="main_title">Email</h4>
+                                    <a class="link" href="mailto:example@domain.com">englishberry@example.com</a>
+                                    <a class="link" href="mailto:example@domain.com">englishberry2@example.com</a>
+                                </div>
+                            </li>
+                            <li class="contacts_info-list_item col-md-6 d-flex align-items-center" data-order="3" data-aos="fade-up">
+                                <span class="theme-element theme-element--light media">
+                                    <i class="icon-location icon"></i>
+                                </span>
+                                <div class="main d-flex flex-column">
+                                    <h4 class="main_title">Konum</h4>
+                                    <span> Bostancı caddesi No:54826</span>
+                                    <span>Şirinevler, İstanbulTR  </span>
+                                </div>
+                            </li>
+                            <li class="contacts_info-list_item col-md-6 d-flex align-items-center" data-order="4" data-aos="fade-up">
+                                <span class="theme-element theme-element--light media">
+                                    <i class="icon-clock icon"></i>
+                                </span>
+                                <div class="main d-flex flex-column">
+                                    <h4 class="main_title">Çalışma Saatleri</h4>
+                                    <span>Pazartesi-Cumartesi</span>
+                                    <span>10:00 — 21:00</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contacts_map">
+                        <div id="amap"></div>
+                    </div>
+                </div>
+            </section>
+            <!-- contacts section end -->
+        </main>
+        <div class="video d-flex align-items-center justify-content-center">
+            <div class="container">
+                <div class="video_frame d-flex align-items-center justify-content-center">
+                    <i class="icon-close video_frame-close"></i>
+                    <div id="player"></div>
+                </div>
+            </div>
+        </div>
+        {% endblock content %}

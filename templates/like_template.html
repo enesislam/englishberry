@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div style="text-align: center;margin-top:20%;">
+ {% for content in contents %}
+  <!-- checkin if user has already liked the content or not -->
+    {% if content.id in already_liked %} 
+       <p>{{ content.content }}</p>
+        <a name="{{ content.id }}" style="font-size:48px;color: blue;" class="likin" id="co"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+        {% else %}
+       <p> {{ content.content }} </p>
+        <a name="{{ content.id }}" style="font-size:48px;color: black;" class="likin" id="co"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+    {% endif %}
+ {% endfor %}
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+// AJAX CALL
+$('.likin').click(function(){
+    $.ajax({
+             type: "POST",
+             url: "{% url 'like' %}",
+             data: {'content_id': $(this).attr('name'),'operation':'like_submit','csrfmiddlewaretoken': '{{ csrf_token }}'},
+             dataType: "json",
+             success: function(response) {
+              selector = document.getElementsByName(response.content_id);
+                    if(response.liked==true){
+                      $(selector).css("color","blue");
+                    }
+                    else if(response.liked==false){
+                      $(selector).css("color","black");
+                    }
+
+
+              }
+
+        });
+
+  })
+</script>
+    
+</body>
+</html>
