@@ -1,0 +1,247 @@
+/*------------------------------------------------------------------
+ * Theme Name: iofrm - theme 8
+ * Theme URI: http://www.brandio.io/envato/iofrm
+ * Author: Brandio
+ * Author URI: http://www.brandio.io/
+ * Copyright 2018 Brandio.
+ -------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+[Table of contents]
+
+1. General Styles.
+2. Responsive Styles.
+-------------------------------------------------------------------*/
+/* -----------------------------------
+    1 - General Styles
+------------------------------------*/
+.website-logo {
+    display: none;
+    top: 50px;
+    left: 50px;
+    right: initial;
+    bottom: initial;
+}
+
+.website-logo img {
+    width: 100px;
+}
+
+.website-logo .logo {
+    background-image: url("../images/logo-light.svg");
+}
+
+.website-logo .logo img {
+    width: 100px;
+}
+
+.website-logo-inside img {
+    width: 100px;
+}
+
+.website-logo-inside .logo {
+    background-image: url("../images/logo-light.svg");
+}
+
+.website-logo-inside .logo img {
+    width: 100px;
+}
+
+.img-holder {
+    width: 550px;
+    background-color: #fff;
+}
+
+.img-holder .info-holder h3 {
+    color: #064E89;
+}
+
+.img-holder .info-holder p {
+    color: #064E89;
+}
+
+.img-holder .bg {
+    opacity: 0.23;
+    background-image: none;
+}
+
+.form-holder {
+    margin-left: 550px;
+}
+
+.form-holder .form-content ::-webkit-input-placeholder {
+    color: #526489;
+}
+
+.form-holder .form-content :-moz-placeholder {
+    color: #526489;
+}
+
+.form-holder .form-content ::-moz-placeholder {
+    color: #526489;
+}
+
+.form-holder .form-content :-ms-input-placeholder {
+    color: #526489;
+}
+
+.form-control ::-webkit-input-placeholder {
+    color: #526489;
+}
+
+.form-control :-moz-placeholder {
+    color: #526489;
+}
+
+.form-control ::-moz-placeholder {
+    color: #526489;
+}
+
+.form-control :-ms-input-placeholder {
+    color: #526489;
+}
+
+.form-content {
+    background-color: #44C97D;
+}
+
+.form-content .form-group {
+    color: #fff;
+}
+
+.form-content .form-items {
+    max-width: 340px;
+    text-align: left;
+}
+
+.form-content h3 {
+    color: #fff;
+    text-align: left;
+}
+
+.form-content p {
+    color: #fff;
+    text-align: left;
+}
+
+.form-content label {
+    color: #fff;
+    text-align: left;
+}
+
+.form-content .page-links a {
+    color: #fff;
+}
+
+.form-content .page-links a:after {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.form-content .page-links a.active:after {
+    background-color: #fff;
+}
+
+.form-content .page-links a:hover:after, .form-content .page-links a:focus:after {
+    background-color: #fff;
+}
+
+.form-content input, .form-content .dropdown-toggle.btn-default {
+    border: 0;
+    background-color: #fff;
+    color: #8D8D8D;
+}
+
+.form-content input:hover, .form-content input:focus, .form-content .dropdown-toggle.btn-default:hover, .form-content .dropdown-toggle.btn-default:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: #8D8D8D;
+}
+
+.form-content textarea {
+    background-color: #fff;
+    border: 0;
+    color: #8D8D8D;
+}
+
+.form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: #8D8D8D;
+}
+
+.form-content input[type="checkbox"]:not(:checked) + label, .form-content input[type="checkbox"]:checked + label, .form-content input[type="radio"]:not(:checked) + label, .form-content input[type="radio"]:checked + label {
+    color: #fff;
+}
+
+.form-content input[type="checkbox"]:checked + label, .form-content input[type="radio"]:checked + label {
+    color: #fff;
+}
+
+.form-content input[type="checkbox"]:checked + label:before, .form-content input[type="radio"]:checked + label:before {
+    background: #fff;
+    border: 0px solid #fff;
+}
+
+.form-content input[type="checkbox"]:not(:checked) + label:before, .form-content input[type="radio"]:not(:checked) + label:before {
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+.form-content input[type="checkbox"]:checked + label:after, .form-content input[type="checkbox"]:not(:checked) + label:after {
+    color: #0093FF;
+}
+
+.form-content input[type="radio"]:checked + label:after, .form-content input[type="radio"]:not(:checked) + label:after {
+    background-color: #0093FF;
+}
+
+.form-content .custom-options input[type="checkbox"]:not(:checked) + label, .form-content .custom-options input[type="checkbox"]:checked + label, .form-content .custom-options input[type="radio"]:not(:checked) + label, .form-content .custom-options input[type="radio"]:checked + label {
+    color: #606060;
+    background-color: rgba(247, 247, 247, 0.75);
+}
+
+.form-content .custom-options input[type="checkbox"]:checked + label, .form-content .custom-options input[type="radio"]:checked + label {
+    color: #606060;
+    background-color: #fff;
+    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+}
+
+.form-content .form-button .ibtn {
+    background-color: #fff;
+    color: #44C97D;
+    -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.16);
+}
+
+.form-content .form-button .ibtn:hover, .form-content .form-button .ibtn:focus {
+    -webkit-box-shadow: 0 5px 6px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.16);
+}
+
+.form-content .other-links span {
+    color: #fff;
+}
+
+.form-content .other-links a {
+    color: #fff;
+}
+
+/* -----------------------------------
+    2 - Responsive Styles
+------------------------------------*/
+@media (max-width: 992px) {
+    .form-holder {
+        margin-left: 0;
+    }
+
+    .website-logo {
+        top: 50px;
+        left: 50px;
+        right: initial;
+        bottom: initial;
+    }
+
+    .website-logo .logo {
+        background-image: url("../images/logo-light.svg");
+    }
+}

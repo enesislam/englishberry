@@ -1,0 +1,176 @@
+/**
+ * Hosteller
+ * Hosteller Template created for hostels, students hotels, guest houses, small hotel, resort, room reservation, travel and more
+ * Exclusively on https://1.envato.market/hosteller-html
+ *
+ * @encoding        UTF-8
+ * @version         1.0.0
+ * @copyright       (C) 2018 - 2022 Merkulove ( https://merkulov.design/ ). All rights reserved.
+ * @license         Envato License https://1.envato.market/KYbje
+ * @contributors    Lamber Lilit (winter.rituel@gmail.com)
+ * @support         help@merkulov.design
+ **/
+@font-face {
+    font-family: icomoon;
+    src: url(../../fonts/icomoon.woff) format("woff"),url(../../fonts/icomoon.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block
+}
+
+[class*=" icon-"],[class^=icon-] {
+    font-family: icomoon!important;
+    speak: never;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.icon-stream:before {
+    content: "\e918"
+}
+
+.icon-sofa:before {
+    content: "\e915"
+}
+
+.icon-bunk_bed:before {
+    content: "\e900"
+}
+
+.icon-check:before {
+    content: "\e901"
+}
+
+.icon-chevron_down:before {
+    content: "\e902"
+}
+
+.icon-comment:before {
+    content: "\e903"
+}
+
+.icon-calendar:before {
+    content: "\e904"
+}
+
+.icon-email:before {
+    content: "\e905"
+}
+
+.icon-play:before {
+    content: "\e906"
+}
+
+.icon-facebook:before {
+    content: "\e907"
+}
+
+.icon-reply:before {
+    content: "\e908"
+}
+
+.icon-instagram:before {
+    content: "\e909"
+}
+
+.icon-twitter:before {
+    content: "\e90a"
+}
+
+.icon-user:before {
+    content: "\e90b"
+}
+
+.icon-star:before {
+    content: "\e90e"
+}
+
+.icon-twin_bed:before {
+    content: "\e90f"
+}
+
+.icon-eye:before {
+    content: "\e910"
+}
+
+.icon-clock:before {
+    content: "\e912"
+}
+
+.icon-location:before {
+    content: "\e913"
+}
+
+.icon-whatsapp:before {
+    content: "\e921"
+}
+
+.icon-phone:before {
+    content: "\e90c"
+}
+
+.icon-search:before {
+    content: "\e90d"
+}
+
+.icon-arrow_right:before {
+    content: "\e911"
+}
+
+.icon-arrow_left:before {
+    content: "\e914"
+}
+
+.icon-close:before {
+    content: "\e919"
+}
+
+.icon-chevron_down--entypo:before {
+    content: "\e916"
+}
+
+.icon-close--entypo:before {
+    content: "\e917"
+}
+
+@font-face {
+    font-family:icomoon;src:local("icomoon"),url(../fonts/icomoon.woff2) format("woff2"),url(../fonts/icomoon.woff) format("woff");font-weight:400;font-style:normal;font-display:swap
+}
+
+@font-face {
+    font-family:OpenSans;src:local("OpenSans-Regular"),url(../fonts/OpenSans-Regular.woff2) format("woff2"),url(../fonts/OpenSans-Regular.woff) format("woff");font-weight:400;font-style:normal;font-display:swap
+}
+
+@font-face {
+    font-family:OpenSans;src:local("OpenSans-SemiBold"),url(../fonts/OpenSans-SemiBold.woff2) format("woff2"),url(../fonts/OpenSans-SemiBold.woff) format("woff");font-weight:600;font-style:normal;font-display:swap
+}
+
+@font-face {
+    font-family:OpenSans-Bold;src:local("OpenSans-Bold"),url(../fonts/OpenSans-Bold.woff2) format("woff2"),url(../fonts/OpenSans-Bold.woff) format("woff");font-weight:700;font-style:normal;font-display:swap
+}
+
+@font-face {
+    font-family:Mulish;src:local("Mulish-Medium"),url(../fonts/Mulish-Medium.woff2) format("woff2"),url(../fonts/Mulish-Medium.woff) format("woff");font-weight:500;font-style:normal;font-display:swap
+}
+
+@font-face {
+    font-family:Mulish;src:local("Mulish-SemiBold"),url(../fonts/Mulish-SemiBold.woff2) format("woff2"),url(../fonts/Mulish-SemiBold.woff) format("woff");font-weight:600;font-style:normal;font-display:swap
+}
+
+@font-face {
+    font-family:Mulish;src:local("Mulish-Bold"),url(../fonts/Mulish-Bold.woff2) format("woff2"),url(../fonts/Mulish-Bold.woff) format("woff");font-weight:700;font-style:normal;font-display:swap
+}
+
+@font-face {
+    font-family:Mulish;src:local("Mulish-ExtraBold"),url(../fonts/Mulish-ExtraBold.woff2) format("woff2"),url(../fonts/Mulish-ExtraBold.woff) format("woff");font-weight:800;font-style:normal;font-display:swap
+}
+
+@font-face {
+    font-family:Mulish;src:local("Mulish-Black"),url(../fonts/Mulish-Black.woff2) format("woff2"),url(../fonts/Mulish-Black.woff) format("woff");font-weight:900;font-style:normal;font-display:swap
+}
+/*# sourceMappingURL=../sourcemaps/preload.css.map */
