@@ -9,10 +9,6 @@
   infinite;
     transform-origin: 50% 50%;
 }
-
-
-
-
 @keyframes shake-animation {
    0% { transform:translate(0,0) }
   1.78571% { transform:translate(5px,0) }
@@ -97,9 +93,7 @@
   width: 8.23em;
   border-radius: 81em;
 }
-
-
-
+ 
 .hidden {
     display:none;
 } 
@@ -123,12 +117,6 @@
           <img class="avatar" id="avatar" src="{{i.image.url}}" alt=" " />
           {% endfor %}
     </div>
-       
-         
-
- 
-       
-
         <span style="margin-top: 24px;font-size: 45px;font-weight: bold;">
             @{% user_display user %}
         </span>
@@ -158,12 +146,10 @@
                 <i id='ifUneedThenAdd' style="cursor:pointer;" class='bx bxs-pencil'></i>
             {% endif %}
         </span>
-         
 </div>
             <!-- benefits section start -->
             <section class="about_benefits section">
                 <div class="container">
-                   
                      {% if like %}
                     <section id="dersler" class="rooms section--blockbg section--nopb">
                 <div class="block"></div>
@@ -176,7 +162,6 @@
                     </div>
                     <ul class="rooms_list d-md-flex flex-wrap">
                         {% for post in like  %}
- 
                         <li class="rooms_list-item col-md-6 col-xl-4" data-order="1" data-aos="fade-up"><a href="{% url 'post-detail' post.slug %}">
                             <div class="item-wrapper d-md-flex flex-column">
                                 <div class="media">
@@ -190,12 +175,9 @@
                                     <a class="main_title h5" href="{% url 'post-detail' post.slug %}" data-shave="true">{{post.title}}</a> 
                                     <div class="main_amenities">
                                         <span class="main_amenities-item d-inline-flex align-items-center">
-                                            <a href="{{post.get_cat_url}}">Kategori:{{post.category}}</a>
-                                                
-                                        </span>
-                                        
+                                            <a href="{{post.get_cat_url}}">Kategori:{{post.category}}</a>          
+                                        </span> 
                                     </div>
-
                                     <a class="link link--arrow d-inline-flex align-items-center" href="{% url 'post-detail' post.slug %}">
                                         İzle
                                         <i class="icon-arrow_right icon"></i>
@@ -207,7 +189,6 @@
                     </ul>
                 </div>
             </section> 
-                     
                     {% endif %}<br><br><hr data-aos="fade-left"><br>
                     {% if sorduklarim %}  
                     <div id="eff">
@@ -240,15 +221,13 @@ $(".likin","span > a").click(function(){
              success: function(response) {
                 selector = document.getElementsByName(response.content_id);
                 $(selector).html(response.msg)
-                 
-
                  if (response.bos_gari){
                         $('#eff').html("<div id='eff'><h3 data-aos='fade-left' > </h3><h4>"+ response.msg+"</h4> </div>")
                           function hide_itt(){
  
                  $('#eff').hide();
             }
-                        setTimeout(hide_itt, 3200);
+                 setTimeout(hide_itt, 3200);
                  }
                 function hide_it(){
                  $(selector).html('');
@@ -278,17 +257,13 @@ $('#add-bio').on('submit', function(e){
                     dataType: "json",
                     'operation':'add_bio'
                 },
-                
                 success: function(data){
                     console.log(data)
-                $('#output').hide()
-                $('#output2').show()
-                $('#bionun_texti').html(data.bio)
-                 $('#add-bio').hide()
-
-
-             }
-                ,
+                    $('#output').hide()
+                    $('#output2').show()
+                    $('#bionun_texti').html(data.bio)
+                    $('#add-bio').hide()
+                },
                 failure: function() {
                }
          });
@@ -302,8 +277,7 @@ $('#uploadFile').on('change', function(){
     var data = new FormData();
     data.append("image", $("input[id^='uploadFile']")[0].files[0]);
     data.append("csrfmiddlewaretoken", "{{ csrf_token }}");       
-    data.append("operation", "add_pp");       
- 
+    data.append("operation", "add_pp");
         $.ajax({
             method: "POST",
             url: "{% url 'account_profile' %}",
@@ -313,14 +287,11 @@ $('#uploadFile').on('change', function(){
             data: data,
             success: function(a) {
             let object = JSON.parse(a) 
-                $('#avatar').attr('src', object['pp'])
-                $( "#avatar" ).load(window.location.href + " #avatar" );
+                $('#avatar').attr('src', `${object['pp']}?t={new Date().getTime()}`)
+                //$( "#avatar" ).load(window.location.href + " #avatar" );
                 console.log(object['pp'])
             },
-
         })
-        
-}); 
- 
+});
 </script>
 {% endblock content %}
